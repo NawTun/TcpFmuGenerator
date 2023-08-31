@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fmiModelDescription
+	fmiVersion="2.0"
+	modelName="$$modelName$$"
+	guid="{$$GUID$$}"
+	version="$$version$$"
+	author="$$author$$"
+	copyright="$$copyright$$"
+	license="$$license$$"
+	description="$$description$$"
+	generationTool="ghorwin/FMICodeGenerator@github - C++ Code using FMI support functions from IBK@TU Dresden"
+	generationDateAndTime="$$dateandtime$$"
+	variableNamingConvention="structured"
+	numberOfEventIndicators="0">
+
+	<!-- The following properties are the defaults and can be omitted
+		needsExecutionTool="false"
+		canBeInstantiatedOnlyOncePerProcess="false"
+		providesDirectionalDerivative="false"
+
+		CoSim only:
+		canRunAsynchronuously = "false"
+
+	-->
+
+	<ModelExchange
+		modelIdentifier="$$modelName$$"
+		completedIntegratorStepNotNeeded="true"
+		canNotUseMemoryManagementFunctions="true"
+		canGetAndSetFMUstate="true"
+		canSerializeFMUstate="true"
+	/>
+
+	<CoSimulation
+		modelIdentifier="$$modelName$$"
+		canHandleVariableCommunicationStepSize="true"
+		canInterpolateInputs="false"
+		maxOutputDerivativeOrder="0"
+		canNotUseMemoryManagementFunctions="true"
+		canGetAndSetFMUstate="true"
+		canSerializeFMUstate="true"
+	/>
+
+	<LogCategories>
+		<Category name="logStatusWarning" />
+		<Category name="logStatusError" />
+		<Category name="logAll" />
+		<Category name="logFmi2Call" />
+	</LogCategories>
+
+	<DefaultExperiment startTime="0.0" stopTime="10.0" tolerance="1e-06"/>
+
+	<ModelVariables>
+
+		<!-- For input variables we need to give a 'start' attribute -->
+		<!-- For output variables with initial="exact" we need to give a 'start' attribute -->
+		$$scalarVariables$$
+
+	</ModelVariables>
+
+	<ModelStructure>
+		<Outputs>
+			<!-- dependencies must be defined for all output quantities. 'dependencyKind' is only needed
+				when some dependencies are constant factors or parameters.
+			-->
+			$$outputDependencies$$
+
+		</Outputs>
+	</ModelStructure>
+
+</fmiModelDescription>
+
