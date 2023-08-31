@@ -1,2 +1,27 @@
-# TcpFmuGenerator
-This is a tool which is used to generate a fmu with TCP communication in order to co-simulation with simulink model.
+## TcpFmuGenerator简介
+该工具的目的是为了将FMU模型和Simulink模型联合起来进行集成仿真，工具使用TCP协议以客户端的形式收发数据，工具需要配合Simulink端TCP服务器进行使用。该工具使用了开源工具FMIGenerator和第三方FMU检测工具FmuChecker。
+
+## 使用说明
+由于该工具的主要应用场景是windows，所以程序的运行可以使用命令行或者批处理，在命令行中指定关键参数。 <br />
+生成的FMU连同地址配置文件addr.config都需要导入GvSimLab中，其中FMU文件使用模型导入方式进行集成，地址配置文件在生成工程之后放入BusManager文件夹中。 <br />
+addr.config可根据需要进一步编辑，该文件中指定了TCP客户端模型所连接的TCP服务端端口、地址以及本地端口。文件中可以配置多个模型对应的地址，并以模型名称开头进行区分，如下所示： <br />
+RAT_local_port=12000 <br />
+RAT_remote_ip=192.168.0.20 <br />
+RAT_remote_port=5500 <br />
+EPS_local_port=13000 <br />
+EPS_remote_ip=192.168.0.21 <br />
+EPS_remote_port=5500
+
+
+## 程序关键输入参数
+
+### 目标目录
+该参数指定了程序最终生成的FMU和其他程序运行过程中产生的中间文件的路径，如果指定的路径不存在，程序会自动生成指定目录，如果路径存在，但是不为空，程序会中止。建议指定目标目录为现存的空目录或者不存在的目录。
+
+### 模型名称
+该参数指定了程序最终生成的FMU的模型名称，模型名称必须使用数字，字母或者下划线，并且必须使用字母开头。
+
+### 是否检测生成的FMU
+该参数指定是否对最终生成的FMU进行检测以判断是否符合FMI规范。
+
+
