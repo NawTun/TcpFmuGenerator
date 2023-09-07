@@ -139,6 +139,9 @@ int func($$funcArgs$$) {
 	int conn_status = connect(local_socket, (struct sockaddr*)&server_addr, sizeof(sockaddr_in));
 	if (conn_status != 0) {
 		std::cout << "failed to connect to server" << std::endl;
+		closesocket(local_socket);
+	    	WSACleanup();
+	    	return -6;
 	}
 	else {
 		std::cout << "success to connect to server " << remote_ip << ":" << remote_port_num << std::endl;
